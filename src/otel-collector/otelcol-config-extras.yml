@@ -16,3 +16,17 @@
 #    pipelines:
 #      traces:
 #        exporters: [spanmetrics, otlphttp/example]
+exporters:
+  otlp/bindplane:
+    endpoint: http://host.docker.internal:4317  # or whatever port BindPlane is using
+    tls:
+      insecure: true
+
+service:
+  pipelines:
+    traces:
+      exporters: [spanmetrics, otlp/bindplane]
+    metrics:
+      exporters: [otlp/bindplane]
+    logs:
+      exporters: [otlp/bindplane]
